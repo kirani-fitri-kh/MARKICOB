@@ -297,7 +297,7 @@ function renderProductModalBody(){
           <button class="btn btn-ghost" id="pmBuyNowBtn" ${p.stock<=0?"disabled":""}>Beli Sekarang</button>
         </div>
 
-        <h4 class="pm-section-title">Beri Rating (gunakan bunga ✿)</h4>
+        <h4 class="pm-section-title">Beri Rating ✿</h4>
         ${flowerRatingInteractive(p.id, myFlowerPick)}
 
         <h4 class="pm-section-title">Ulasan Produk (${reviews.length})</h4>
