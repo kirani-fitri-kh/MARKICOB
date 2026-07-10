@@ -53,8 +53,7 @@ const DEFAULT_PRODUCTS = [
   { id:16, name:"Buket Blind Box Surprise", category:"buket", price:150000, stock:5, icon:"🎁",
     desc:"Rangkaian buket berisi beberapa blind box mini, memadukan kejutan koleksi dengan keindahan buket hadiah." },
   { id:17, name:"Buket Dry Flower (+notes)", category:"buket", price:110000, stock:7, icon:"🌾",
-    desc:"Buket bunga kering yang tahan lama dan terbingkai dengan resin. Memiliki notes yang dapat menyampaikan Pesan pada penerima. cocok untuk hadiah maupun dekorasi ruangan." 
-   image:"image/preserved-flower.jpg"},
+    desc:"Buket bunga kering yang tahan lama dan terbingkai dengan resin. Memiliki notes yang dapat menyampaikan Pesan pada penerima. cocok untuk hadiah maupun dekorasi ruangan."},
   { id:18, name:"Jar of Mood", category:"letter", price:48000, stock:11, icon:"🫙",
     desc:"Toples berisi puluhan kartu mood harian mungil untuk menemani dan merayakan setiap suasana hatimu." },
   { id:19, name:"Motivation Jar", category:"letter", price:48000, stock:4, icon:"🌟",
