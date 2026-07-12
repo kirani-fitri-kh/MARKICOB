@@ -8,7 +8,7 @@
 /* ---------------------------------------------------------
    0. CONSTANTS & DUMMY DATA
 --------------------------------------------------------- */
-const WA_NUMBER = "6281234567890"; // nomor WhatsApp admin (dummy)
+const WA_NUMBER = "6281220505562"; // nomor WhatsApp admin (dummy)
 const SHIPPING_COST = 10000;
 const LOW_STOCK_THRESHOLD = 3;
 const CATEGORY_LABELS = {
