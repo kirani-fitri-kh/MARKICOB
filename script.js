@@ -52,7 +52,7 @@ const DEFAULT_PRODUCTS = [
     desc:"Buket unik berisi rangkaian alat tulis pastel — pulpen, sticky notes, hingga pensil — hadiah anti-mainstream yang tetap berguna." },
   { id:16, name:"Buket Blind Box Surprise", category:"buket", price:150000, stock:5, icon:"🎁", image:"images/cat-buket.svg",
     desc:"Rangkaian buket berisi beberapa blind box mini, memadukan kejutan koleksi dengan keindahan buket hadiah." },
-  { id:17, name:"Buket Dry Flower Lavender", category:"buket", price:110000, stock:7, icon:"🌾", image:"images/cat-buket.svg",
+  { id:17, name:"Buket Dry Flower Lavender", category:"buket", price:110000, stock:7, icon:"🌾", image:"images/preseved flowers.jpg",
     desc:"Buket bunga kering lavender yang tahan lama dan wangi lembut, cocok untuk hadiah maupun dekorasi ruangan." },
   { id:18, name:"Jar of Mood", category:"letter", price:48000, stock:11, icon:"🫙", image:"images/cat-letter.svg",
     desc:"Toples berisi puluhan kartu mood harian mungil untuk menemani dan merayakan setiap suasana hatimu." },
