@@ -8,7 +8,7 @@
 /* ---------------------------------------------------------
    0. CONSTANTS & DUMMY DATA
 --------------------------------------------------------- */
-const WA_NUMBER = "6281234567890"; // nomor WhatsApp admin (dummy)
+const WA_NUMBER = "6281220505562"; // nomor WhatsApp admin (dummy)
 const SHIPPING_COST = 10000;
 const LOW_STOCK_THRESHOLD = 3;
 const CATEGORY_LABELS = {
@@ -16,7 +16,8 @@ const CATEGORY_LABELS = {
 };
 const VOUCHERS = {
   "LILY10": { type:"percent", value:10, label:"Diskon 10%" },
-  "NEWMEMORY": { type:"flat", value:15000, label:"Potongan Rp15.000" }
+  "NEWMEMORY": { type:"flat", value:15000, label:"Potongan Rp15.000" },
+  "LOLANNIV2": { type:"percent", value:50, label:"Diskon 50%" }
 };
 
 const DEFAULT_PRODUCTS = [
