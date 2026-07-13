@@ -424,7 +424,7 @@ function renderProductModalBody(){
         </div>
         <button class="btn btn-line btn-block wishlist-btn-inline" id="pmWishlistBtn">${wishlist.includes(p.id) ? "♥ Di Wishlist" : "♡ Simpan ke Wishlist"}</button>
 
-        <h4 class="pm-section-title">Beri Rating (gunakan bunga ✿)</h4>
+        <h4 class="pm-section-title">Beri Rating</h4>
         ${flowerRatingInteractive(p.id, myFlowerPick)}
 
         <h4 class="pm-section-title">Ulasan Produk (${reviews.length})</h4>
