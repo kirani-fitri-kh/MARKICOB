@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lily of Lies — Gift & Letter Studio</title>
+<meta name="description" content="Lily of Lies — Gift & Letter Studio. More Than A Gift, A Memory. Belanja stationery, hiasan, blind box, buket unik, dan letter keepsakes.">
+
+<!-- ================= Google Analytics (DUMMY / SIMULASI) =================
+  Script di bawah ini adalah SIMULASI Google Analytics (bukan ID asli).
+  Dalam implementasi produksi, ganti "G-XXXXXXXXXX" dengan Measurement ID asli.
+
+  METRIK YANG AKAN DIPANTAU:
+  1. Bounce Rate       -> Persentase pengunjung yang keluar tanpa interaksi (mis. tidak scroll/klik produk).
+  2. Session Duration   -> Rata-rata lama waktu pengunjung berada di halaman.
+  3. Page Views         -> Jumlah tampilan halaman & bagian yang paling sering dilihat (Produk, Blind Box, dll).
+  4. Add to Cart Rate    -> Persentase pengunjung yang menambahkan produk ke keranjang (event: add_to_cart).
+  5. Conversion Rate     -> Persentase pengunjung yang menyelesaikan checkout (event: purchase).
+  6. Cart Abandonment    -> Pengunjung yang menambah produk ke cart namun tidak checkout.
+  7. Average Order Value -> Rata-rata nilai transaksi per pembelian.
+  8. Traffic Source      -> Asal pengunjung (organic, sosial media, direct, referral).
+  9. Search Terms        -> Kata kunci yang paling sering dicari di fitur search produk.
+  10. Product Performance-> Produk yang paling banyak dilihat / ditambah ke keranjang / dibeli.
+============================================================================ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<!-- ============================================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Caveat:wght@500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- =========================================================
+     PROMO MARQUEE (Banner Berjalan)
+========================================================= -->
+<div class="promo-marquee" id="promoMarquee">
+  <div class="promo-marquee-track">
+    <span>✦ Gratis ongkos kirim untuk semua pesanan senilai Rp150.000+</span>
+    <span>✦ Pakai kode <b>LILY10</b> untuk diskon 10%</span>
+    <span>✦ Koleksi baru "Blind Box Dark Academia" sudah tersedia</span>
+    <span>✦ Follow Instagram kami untuk promo mingguan</span>
+    <span>✦ More Than A Gift, A Memory 🌷</span>
+    <!-- diulang agar looping mulus -->
+    <span>✦ Gratis ongkos kirim untuk semua pesanan senilai Rp150.000+</span>
+    <span>✦ Pakai kode <b>LILY10</b> untuk diskon 10%</span>
+    <span>✦ Koleksi baru "Blind Box Dark Academia" sudah tersedia</span>
+    <span>✦ Follow Instagram kami untuk promo mingguan</span>
+    <span>✦ More Than A Gift, A Memory 🌷</span>
+  </div>
+</div>
+
+<!-- =========================================================
+     TOAST NOTIFIKASI (global)
+========================================================= -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<!-- =========================================================
+     NAVBAR (Sticky / Fixed — tidak hilang saat scroll)
+========================================================= -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="brand" data-scroll>
+      <span class="brand-mark">✦</span>
+      <span class="brand-text">
+        <span class="brand-name">Lily of Lies</span>
+        <span class="brand-sub">Gift & Letter Studio</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" data-scroll>Beranda</a>
+      <a href="#produk" data-scroll>Produk</a>
+      <a href="#segera-hadir" data-scroll>Segera Hadir</a>
+      <a href="#cara-belanja" data-scroll>Cara Belanja</a>
+      <a href="#faq" data-scroll>FAQ</a>
+      <a href="#footer" data-scroll>Tentang Kami</a>
+    </nav>
+
+    <div class="nav-search">
+      <input type="search" id="navSearchInput" placeholder="Cari produk, misal: notebook..." aria-label="Cari produk">
+      <span class="search-icon">⚲</span>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="loginTriggerBtn" title="Masuk Akun">
+        <span class="icon">👤</span>
+        <span class="account-label" id="accountLabel">Masuk</span>
+      </button>
+      <button class="icon-btn cart-btn" id="wishlistTriggerBtn" title="Wishlist">
+        <span class="icon">♡</span>
+        <span class="cart-count" id="wishlistCount">0</span>
+      </button>
+      <button class="icon-btn cart-btn" id="cartTriggerBtn" title="Keranjang Belanja">
+        <span class="icon">🧺</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Buka Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Bottom tab bar khusus mobile — Beranda / Produk / Keranjang selalu terlihat -->
+<nav class="mobile-tabbar" id="mobileTabbar">
+  <a href="#home" data-scroll><span>🏠</span>Beranda</a>
+  <a href="#produk" data-scroll><span>🛍️</span>Produk</a>
+  <button id="mobileCartBtn"><span>🧺</span>Keranjang<span class="tab-cart-count" id="tabCartCount">0</span></button>
+</nav>
+
+<main>
+
+  <!-- =========================================================
+       HERO BANNER
+  ========================================================= -->
+  <section class="hero" id="home">
+    <div class="hero-paper"></div>
+    <div class="hero-inner">
+      <span class="eyebrow">Toko Hadiah &amp; Surat Estetik</span>
+      <h1 class="hero-title">Lily of Lies</h1>
+      <p class="hero-slogan">"More Than A Gift, A Memory"</p>
+      <p class="hero-desc">Setiap kado yang kami kemas menyimpan cerita — dari stationery mungil, hiasan hangat, blind box penuh kejutan, buket tak biasa, hingga surat rahasia untuk dirimu di masa depan.</p>
+      <div class="hero-cta">
+        <a href="#produk" class="btn btn-primary" data-scroll>Jelajahi Produk</a>
+        <a href="#cara-belanja" class="btn btn-ghost" data-scroll>Cara Belanja</a>
+      </div>
+      <div class="hero-seal" aria-hidden="true">
+        <div class="seal">
+          <span>Sejak</span>
+          <strong>2024</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       KATEGORI CEPAT
+  ========================================================= -->
+  <section class="cat-strip" aria-label="Kategori produk">
+    <div class="cat-strip-inner" id="catStrip">
+      <button class="cat-chip active" data-cat="all">✦ Semua</button>
+      <button class="cat-chip" data-cat="stationery">✐ᝰ Stationery</button>
+      <button class="cat-chip" data-cat="hiasan">ִֶָ࣪☾. Hiasan</button>
+      <button class="cat-chip" data-cat="blindbox">.☘︎ ݁˖ Blind Box</button>
+      <button class="cat-chip" data-cat="buket">ꨄ︎ Buket</button>
+      <button class="cat-chip" data-cat="letter">⌯⌲ Letter & Keepsakes</button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       KATALOG PRODUK
+  ========================================================= -->
+  <section class="section" id="produk">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Katalog</span>
+        <h2>Temukan Kado yang Tepat</h2>
+      </div>
+      <p class="section-note">Sentuh atau arahkan kursor ke kartu produk untuk melihat info singkat.</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="filterCategory">Kategori</label>
+        <select id="filterCategory">
+          <option value="all">Semua Kategori</option>
+          <option value="stationery">Stationery</option>
+          <option value="hiasan">Hiasan</option>
+          <option value="blindbox">Blind Box</option>
+          <option value="buket">Buket</option>
+          <option value="letter">Letter & Keepsakes</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="filterPrice">Rentang Harga</label>
+        <select id="filterPrice">
+          <option value="all">Semua Harga</option>
+          <option value="0-30000">Di bawah Rp30.000</option>
+          <option value="30000-60000">Rp30.000 – Rp60.000</option>
+          <option value="60000-100000">Rp60.000 – Rp100.000</option>
+          <option value="100000-999999">Di atas Rp100.000</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sortBy">Urutkan</label>
+        <select id="sortBy">
+          <option value="default">Rekomendasi</option>
+          <option value="price-asc">Harga Terendah</option>
+          <option value="price-desc">Harga Tertinggi</option>
+          <option value="rating-desc">Rating Tertinggi</option>
+          <option value="name-asc">Nama A-Z</option>
+        </select>
+      </div>
+      <button class="btn btn-line" id="resetFilterBtn">Reset Filter</button>
+    </div>
+
+    <p class="result-count" id="resultCount"></p>
+
+    <div class="product-grid" id="productGrid"><!-- diisi oleh JavaScript --></div>
+    <p class="empty-state" id="emptyState" hidden>Yah, produk tidak ditemukan. Coba kata kunci atau filter lain ✦</p>
+  </section>
+
+  <!-- =========================================================
+       SEGERA HADIR (Upcoming Product)
+  ========================================================= -->
+  <section class="section" id="segera-hadir">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Coming Soon</span>
+        <h2>Segera Hadir di Lily of Lies</h2>
+      </div>
+      <p class="section-note">Klik "Ingatkan Saya" supaya kamu tahu duluan saat produk ini rilis.</p>
+    </div>
+    <div class="upcoming-grid" id="upcomingGrid"><!-- diisi oleh JavaScript --></div>
+  </section>
+
+  <!-- =========================================================
+       CARA BELANJA
+  ========================================================= -->
+  <section class="section section-alt" id="cara-belanja">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Panduan</span>
+        <h2>Cara Belanja di Lily of Lies</h2>
+      </div>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><span class="step-mark">Langkah 1</span><h3>Jelajahi &amp; Pilih</h3><p>Cari produk lewat kolom pencarian atau filter kategori, lalu buka detail produk untuk melihat deskripsi lengkap.</p></div>
+      <div class="step-card"><span class="step-mark">Langkah 2</span><h3>Tambah ke Keranjang</h3><p>Tentukan jumlah, tekan "Tambah ke Keranjang". Keranjangmu tersimpan otomatis meski halaman ditutup.</p></div>
+      <div class="step-card"><span class="step-mark">Langkah 3</span><h3>Checkout</h3><p>Isi data pengiriman, pilih metode pembayaran, pakai voucher bila ada, lalu konfirmasi pesanan.</p></div>
+      <div class="step-card"><span class="step-mark">Langkah 4</span><h3>Konfirmasi via WhatsApp</h3><p>Kirim bukti pesanan otomatis ke WhatsApp admin kami untuk proses lebih lanjut dan pengemasan.</p></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FAQ
+  ========================================================= -->
+  <section class="section" id="faq">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Bantuan</span>
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+      </div>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Berapa lama proses pengemasan pesanan? <span>+</span></button>
+        <div class="faq-a"><p>Pesanan diproses dan dikemas dalam 1–3 hari kerja setelah pembayaran dikonfirmasi.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Apakah bisa request warna/tema custom? <span>+</span></button>
+        <div class="faq-a"><p>Bisa untuk beberapa produk seperti Jar & Buket. Silakan tulis catatan saat checkout atau hubungi kami via WhatsApp.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Metode pembayaran apa saja yang tersedia? <span>+</span></button>
+        <div class="faq-a"><p>Transfer Bank, E-Wallet, dan COD (khusus area tertentu) — dipilih saat proses checkout.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Bagaimana jika stok produk habis? <span>+</span></button>
+        <div class="faq-a"><p>Produk berlabel "Stok Habis" tidak dapat dibeli sementara waktu. Kamu bisa menghubungi kami untuk info restock.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Apakah ada garansi atau retur? <span>+</span></button>
+        <div class="faq-a"><p>Retur berlaku jika produk rusak/cacat produksi, dengan bukti unboxing, maksimal 2x24 jam setelah barang diterima.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       REKOMENDASI (Section, juga muncul di modal produk)
+  ========================================================= -->
+  <section class="section section-alt" id="rekomendasi">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Untukmu</span>
+        <h2>Rekomendasi Produk</h2>
+      </div>
+    </div>
+    <div class="product-grid" id="recommendGrid"><!-- diisi oleh JavaScript --></div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     MODAL: DETAIL PRODUK
+========================================================= -->
+<div class="modal-overlay" id="productModal" hidden>
+  <div class="modal modal-product" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="productModal">✕</button>
+    <div class="modal-body" id="productModalBody"><!-- diisi oleh JavaScript --></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     KERANJANG BELANJA (Drawer)
+========================================================= -->
+<div class="drawer-overlay" id="cartOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h3>Keranjang Belanja</h3>
+    <button class="modal-close" id="closeCartBtn">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"><!-- diisi oleh JavaScript --></div>
+  <div class="cart-drawer-foot">
+    <div class="voucher-row">
+      <input type="text" id="voucherInputCart" placeholder="Kode voucher (opsional)">
+      <button class="btn btn-line" id="applyVoucherCartBtn">Pakai</button>
+    </div>
+    <p class="voucher-msg" id="voucherMsgCart"></p>
+    <div class="cart-total-row">
+      <span>Total</span>
+      <strong id="cartTotalText">Rp0</strong>
+    </div>
+    <button class="btn btn-primary btn-block" id="goCheckoutBtn">Checkout</button>
+  </div>
+</aside>
+
+<!-- =========================================================
+     WISHLIST (Drawer)
+========================================================= -->
+<div class="drawer-overlay" id="wishlistOverlay" hidden></div>
+<aside class="cart-drawer" id="wishlistDrawer" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h3>Wishlist Kamu ♡</h3>
+    <button class="modal-close" id="closeWishlistBtn">✕</button>
+  </div>
+  <div class="cart-items" id="wishlistItems"><!-- diisi oleh JavaScript --></div>
+</aside>
+
+<!-- =========================================================
+     CHECKOUT
+========================================================= -->
+<div class="modal-overlay" id="checkoutModal" hidden>
+  <div class="modal modal-checkout" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="checkoutModal">✕</button>
+    <h2 class="modal-title">Checkout</h2>
+
+    <div class="checkout-grid">
+      <form class="checkout-form" id="checkoutForm">
+        <h4>Data Penerima</h4>
+        <div class="form-row">
+          <label for="ckName">Nama Lengkap</label>
+          <input type="text" id="ckName" required placeholder="Nama penerima">
+          <span class="form-error" id="errName"></span>
+        </div>
+        <div class="form-row">
+          <label for="ckPhone">Nomor WhatsApp</label>
+          <input type="tel" id="ckPhone" required placeholder="08xxxxxxxxxx">
+          <span class="form-error" id="errPhone"></span>
+        </div>
+        <div class="form-row">
+          <label for="ckAddress">Alamat Lengkap</label>
+          <textarea id="ckAddress" required rows="3" placeholder="Alamat pengiriman lengkap"></textarea>
+          <span class="form-error" id="errAddress"></span>
+        </div>
+        <div class="form-row">
+          <label for="ckNote">Catatan (opsional)</label>
+          <textarea id="ckNote" rows="2" placeholder="Contoh: request warna, ucapan kartu, dll."></textarea>
+        </div>
+
+        <h4>Metode Pembayaran</h4>
+        <div class="payment-options" id="paymentOptions">
+          <label class="pay-option">
+            <input type="radio" name="payMethod" value="Transfer Bank" checked>
+            <span>🏦 Transfer Bank</span>
+          </label>
+          <label class="pay-option">
+            <input type="radio" name="payMethod" value="E-Wallet">
+            <span>📱 E-Wallet (OVO/DANA/GoPay)</span>
+          </label>
+          <label class="pay-option">
+            <input type="radio" name="payMethod" value="COD">
+            <span>🚚 COD (Area Tertentu)</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="payNowBtn">Bayar Sekarang</button>
+      </form>
+
+      <div class="checkout-summary">
+        <h4>Ringkasan Pesanan</h4>
+        <div id="checkoutSummaryItems" class="summary-items"><!-- diisi JS --></div>
+        <div class="voucher-row">
+          <input type="text" id="voucherInputCheckout" placeholder="Kode voucher (opsional)">
+          <button type="button" class="btn btn-line" id="applyVoucherCkBtn">Pakai</button>
+        </div>
+        <p class="voucher-msg" id="voucherMsgCk"></p>
+        <div class="summary-line"><span>Subtotal</span><span id="ckSubtotal">Rp0</span></div>
+        <div class="summary-line"><span>Ongkos Kirim</span><span id="ckShipping">Rp10.000</span></div>
+        <div class="summary-line discount-line" id="ckDiscountLine" hidden><span>Diskon Voucher</span><span id="ckDiscount">-Rp0</span></div>
+        <div class="summary-line total-line"><span>Total Bayar</span><strong id="ckTotal">Rp0</strong></div>
+        <p class="hint">Voucher contoh: <b>LILY10</b> (diskon 10%), <b>NEWMEMORY</b> (potongan Rp15.000)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     KONFIRMASI PEMBAYARAN
+========================================================= -->
+<div class="modal-overlay" id="confirmModal" hidden>
+  <div class="modal modal-confirm" role="dialog" aria-modal="true">
+    <div class="confirm-icon">💌</div>
+    <h2>Pembayaran Diproses!</h2>
+    <p>Nomor Pesanan: <strong id="orderNumberText">-</strong></p>
+    <p class="confirm-desc">Terima kasih telah berbelanja di Lily of Lies. Kirim bukti pesanan ini ke WhatsApp admin kami agar pesanan segera diproses.</p>
+    <div class="confirm-actions">
+      <a href="#" id="waConfirmBtn" target="_blank" class="btn btn-primary btn-block">Kirim Konfirmasi via WhatsApp</a>
+      <button class="btn btn-ghost btn-block" id="closeConfirmBtn">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     LOGIN (User & Admin)
+========================================================= -->
+<div class="modal-overlay" id="loginModal" hidden>
+  <div class="modal modal-login" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="loginModal">✕</button>
+    <div class="login-tabs" id="loginTabs">
+      <button class="login-tab active" data-tab="login">Masuk</button>
+      <button class="login-tab" data-tab="register">Daftar</button>
+      <button class="login-tab" data-tab="admin">Admin</button>
+    </div>
+    <p class="hint" id="loginNotice" hidden></p>
+
+    <div class="login-form" id="loggedInView" hidden>
+      <h4>Halo, <span id="loggedInName">Pengguna</span> 👋</h4>
+      <p class="hint">Kamu masuk sebagai <span id="loggedInRole">pengguna</span>. Kamu bisa memberi rating &amp; ulasan produk sekarang.</p>
+      <div class="account-summary">
+        <div style="display:flex;gap:1rem;align-items:center;">
+          <img id="loggedInAvatar" src="" alt="Avatar" style="width:48px;height:48px;border-radius:50%;object-fit:cover;display:none;">
+          <div>
+            <div><strong id="loggedInNameShort">-</strong></div>
+            <div style="color:#6b6b78;font-size:.9rem">Akun pengguna</div>
+          </div>
+        </div>
+        <div><strong>Email</strong><span id="loggedInEmail">-</span></div>
+        <div><strong>Nomor WA</strong><span id="loggedInPhone">Belum diisi</span></div>
+      </div>
+      <div class="account-actions" id="accountActions" style="margin-top:.6rem;">
+        <button class="btn btn-line btn-block" id="openOrdersBtn">Lihat Pesanan</button>
+        <button class="btn btn-line btn-block" id="editProfileBtn">Edit Akun</button>
+        <button class="btn btn-ghost btn-block" id="logoutBtn">Keluar</button>
+      </div>
+      <form class="login-form" id="editAccountForm" hidden>
+        <div class="form-row">
+          <label for="editNameInput">Nama</label>
+          <input type="text" id="editNameInput" required placeholder="Nama kamu">
+        </div>
+        <div class="form-row">
+          <label for="editPhotoInput">Foto Profil (opsional)</label>
+          <input type="file" id="editPhotoInput" accept="image/*">
+          <div style="margin-top:.5rem;"><img id="editPhotoPreview" src="" alt="Preview" style="width:72px;height:72px;border-radius:10px;display:none;object-fit:cover;border:1px solid rgba(30,42,68,0.06);"></div>
+        </div>
+        <div class="form-row">
+          <label for="editEmailInput">Email</label>
+          <input type="email" id="editEmailInput" required placeholder="email@contoh.com">
+        </div>
+        <div class="form-row">
+          <label for="editPhoneInput">Nomor WhatsApp</label>
+          <input type="tel" id="editPhoneInput" placeholder="08xxxxxxxxxx">
+        </div>
+        <div class="form-row">
+          <label for="editAddressInput">Alamat</label>
+          <textarea id="editAddressInput" rows="2" placeholder="Alamat pengiriman"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Simpan Perubahan</button>
+      </form>
+      <!-- duplicate action buttons removed (keberadaan tombol sudah di atas) -->
+    </div>
+
+    <form class="login-form" id="userLoginForm">
+      <h4>Masuk ke Akun</h4>
+      <div class="form-row">
+        <label for="loginNameInput">Nama</label>
+        <input type="text" id="loginNameInput" required placeholder="Nama kamu">
+      </div>
+      <div class="form-row">
+        <label for="loginEmailInput">Email</label>
+        <input type="email" id="loginEmailInput" required placeholder="email@contoh.com">
+      </div>
+      <p class="hint">Masuk dengan akun yang sudah kamu daftarkan untuk lanjut belanja.</p>
+      <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+    </form>
+
+    <form class="login-form" id="userRegisterForm" hidden>
+      <h4>Buat Akun Baru</h4>
+      <div class="form-row">
+        <label for="registerNameInput">Nama</label>
+        <input type="text" id="registerNameInput" required placeholder="Nama kamu">
+      </div>
+      <div class="form-row">
+        <label for="registerEmailInput">Email</label>
+        <input type="email" id="registerEmailInput" required placeholder="email@contoh.com">
+      </div>
+      <div class="form-row">
+        <label for="registerPhoneInput">Nomor WhatsApp</label>
+        <input type="tel" id="registerPhoneInput" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="form-row">
+        <label for="registerAddressInput">Alamat</label>
+        <textarea id="registerAddressInput" rows="2" placeholder="Alamat pengiriman"></textarea>
+      </div>
+      <p class="hint">Akun ini dipakai untuk checkout, memberi rating, dan melihat riwayat belanja kamu.</p>
+      <button type="submit" class="btn btn-primary btn-block">Daftar Sekarang</button>
+    </form>
+
+    <form class="login-form" id="adminLoginForm" hidden>
+      <h4>Masuk sebagai Admin</h4>
+      <div class="form-row">
+        <label for="adminUserInput">Username</label>
+        <input type="text" id="adminUserInput" required placeholder="admin">
+      </div>
+      <div class="form-row">
+        <label for="adminPassInput">Password</label>
+        <input type="password" id="adminPassInput" required placeholder="••••••••">
+      </div>
+      <span class="form-error" id="errAdminLogin"></span>
+      <p class="hint">Demo — Username: <b>admin</b> · Password: <b>admin123</b></p>
+      <button type="submit" class="btn btn-primary btn-block">Masuk sebagai Admin</button>
+    </form>
+  </div>
+</div>
+
+<!-- =========================================================
+     AKUN - RIWAYAT PESANAN (Modal terpisah untuk pelanggan)
+========================================================= -->
+<div class="modal-overlay" id="accountOrdersModal" hidden>
+  <div class="modal modal-admin" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="accountOrdersModal">✕</button>
+    <h2 class="modal-title">Riwayat Pesanan Saya</h2>
+    <div id="accountOrdersList" class="order-history-list"></div>
+    <div style="margin-top:1rem;text-align:right;"><button class="btn btn-ghost" data-close="accountOrdersModal">Tutup</button></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     PANEL ADMIN
+========================================================= -->
+<div class="modal-overlay" id="adminPanel" hidden>
+  <div class="modal modal-admin" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close="adminPanel">✕</button>
+    <h2 class="modal-title">Panel Admin — Kelola Stok</h2>
+    <p class="section-note">Perubahan stok tersimpan otomatis dan langsung memengaruhi katalog produk.</p>
+    <div class="admin-alert" id="adminAlert" hidden></div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Produk</th><th>Kategori</th><th>Harga</th><th>Stok</th><th>Status</th><th>Tambah Stok</th></tr>
+        </thead>
+        <tbody id="adminTableBody"><!-- diisi JS --></tbody>
+      </table>
+    </div>
+
+    <div class="admin-subpanel">
+      <div class="admin-subhead">
+        <h3>Pesanan Masuk</h3>
+        <input type="search" id="adminOrderSearchInput" placeholder="Cari atas nama..." aria-label="Cari pesanan" />
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table admin-orders-table">
+          <thead>
+            <tr><th>Nama</th><th>No. Pesanan</th><th>Tanggal</th><th>Total</th><th>Items</th><th>Status</th></tr>
+          </thead>
+          <tbody id="adminOrdersBody"><!-- diisi JS --></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-subpanel">
+      <h3>Ulasan Pelanggan</h3>
+      <div id="adminReviewPanel"></div>
+    </div>
+
+    <div class="admin-foot">
+      <button class="btn btn-ghost" id="adminLogoutBtn">Keluar dari Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="footer" id="footer">
+  <div class="footer-grid">
+    <div class="footer-col footer-brand">
+      <div class="brand">
+        <span class="brand-mark">✦</span>
+        <span class="brand-text">
+          <span class="brand-name">Lily of Lies</span>
+          <span class="brand-sub">Gift & Letter Studio</span>
+        </span>
+      </div>
+      <p>"More Than A Gift, A Memory" — merangkai hadiah dan kata-kata jadi kenangan yang bisa disimpan.</p>
+      <div class="social-icons">
+        <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">📷</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener" title="TikTok">🎵</a>
+        <a href="https://wa.me/6281220505562" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+        <a href="mailto:hello@lilyoflies.shop" title="Email">✉️</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Navigasi</h5>
+      <a href="#home" data-scroll>Beranda</a>
+      <a href="#produk" data-scroll>Produk</a>
+      <a href="#segera-hadir" data-scroll>Segera Hadir</a>
+      <a href="#cara-belanja" data-scroll>Cara Belanja</a>
+      <a href="#faq" data-scroll>FAQ</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Kategori</h5>
+      <a href="#produk" data-cat-link="stationery">Stationery</a>
+      <a href="#produk" data-cat-link="hiasan">Hiasan</a>
+      <a href="#produk" data-cat-link="blindbox">Blind Box</a>
+      <a href="#produk" data-cat-link="buket">Buket</a>
+      <a href="#produk" data-cat-link="letter">Letter & Keepsakes</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Tentang Kami</h5>
+      <p>Ada pertanyaan seputar produk atau pesanan?</p>
+      <a href="https://wa.me/6281220505562?text=Halo%20Lily%20of%20Lies%2C%20saya%20ingin%20bertanya%20tentang%20produk." target="_blank" rel="noopener" class="btn btn-line btn-sm">💬 Chat via WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Lily of Lies — Gift & Letter Studio. Semua hak cipta dilindungi.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
